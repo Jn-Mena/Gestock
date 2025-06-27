@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/productos">GESTOCK</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos">Productos</a>
+        </li>
+        
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/admin">Panel de Administración</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/usuarios">Usuarios</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/permisos">Permisos</a>
+        </li>
+      </ul>
+      <form class="d-flex" style="flex-basis: 520px; min-width: 320px; max-width: 600px; margin-right: 4rem;" (ngSubmit)="buscarProducto()">
+        <input class="form-control me-2 search-input" style="min-width: 300px; max-width: 520px;" type="search" placeholder="Buscar productos" [(ngModel)]="busqueda" name="busqueda" (input)="buscarProducto()">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+      <select class="form-select select-wide" style="margin-right: 4rem;" [(ngModel)]="filtroProveedor" (change)="filtrarPorProveedor()">
+        <option value="">Todos los proveedores</option>
+        <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+      </select>
+      <select class="form-select select-wide" style="margin-right: 4rem;" [(ngModel)]="filtroCategoria" (change)="filtrarPorCategoria()">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+      </select>
+      <button class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</nav>
